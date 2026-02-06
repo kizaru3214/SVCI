@@ -1,0 +1,8 @@
+{
+  "name": "svci",
+  "version": "1.0.0",
+  "description": "SVCI Website",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'"
+  }
+}
