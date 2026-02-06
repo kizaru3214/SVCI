@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVCI Senior High School SSG - Appointees</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('img/background.jpg') center center / cover fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 41, 79, 0.85) 0%, rgba(15, 41, 79, 0.7) 100%);
+            z-index: -1;
+        }
+        
+        .heading-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Glass morphism effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .glass-nav {
+            background: rgba(15, 41, 79, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes cardEnter {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes slideFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+        
+        @keyframes slideFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+        
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .animate-gradient {
+            background: linear-gradient(90deg, #3b82f6, #93c5fd, #60a5fa, #3b82f6);
+            background-size: 300% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #93c5fd, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        /* Appointees Grid Styles */
+        .appointees-section {
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+        
+        .appointees-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .appointee-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
+            opacity: 0;
+            animation: cardEnter 0.6s ease forwards;
+            width: 200px;
+        }
+        
+        /* Left-to-right staggered animations */
+        .appointee-card:nth-child(odd) {
+            animation-name: slideFromLeft;
+        }
+        
+        .appointee-card:nth-child(even) {
+            animation-name: slideFromRight;
+        }
+        
+        .appointee-card:nth-child(1) { animation-delay: 0.1s; }
+        .appointee-card:nth-child(2) { animation-delay: 0.15s; }
+        .appointee-card:nth-child(3) { animation-delay: 0.2s; }
+        .appointee-card:nth-child(4) { animation-delay: 0.25s; }
+        .appointee-card:nth-child(5) { animation-delay: 0.3s; }
+        .appointee-card:nth-child(6) { animation-delay: 0.35s; }
+        .appointee-card:nth-child(7) { animation-delay: 0.4s; }
+        .appointee-card:nth-child(8) { animation-delay: 0.45s; }
+        .appointee-card:nth-child(9) { animation-delay: 0.5s; }
+        .appointee-card:nth-child(10) { animation-delay: 0.55s; }
+        .appointee-card:nth-child(11) { animation-delay: 0.6s; }
+        .appointee-card:nth-child(12) { animation-delay: 0.65s; }
+        
+        .appointee-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+        
+        .appointee-card:hover .appointee-photo {
+            border-color: rgba(59, 130, 246, 0.8);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+        }
+        
+        .appointee-card:hover .appointee-name {
+            color: #bfdbfe;
+            transform: scale(1.05);
+        }
+        
+        .appointee-card:hover .appointee-position {
+            color: #60a5fa;
+        }
+        
+        .appointee-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.3), rgba(96, 165, 250, 0.2));
+            margin-bottom: 15px;
+            transition: all 0.4s ease;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .appointee-photo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite linear;
+        }
+        
+        .appointee-card:hover .appointee-photo {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .appointee-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .appointee-card:hover .appointee-photo img {
+            transform: scale(1.1);
+        }
+        
+        .position-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(59, 130, 246, 0.9);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .appointee-card:hover .position-badge {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .appointee-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 5px;
+            line-height: 1.3;
+            transition: all 0.3s ease;
+        }
+        
+        .appointee-position {
+            font-size: 0.9rem;
+            color: #bfdbfe;
+            text-align: center;
+            font-weight: 500;
+            line-height: 1.2;
+            transition: all 0.3s ease;
+        }
+        
+        /* Section Tabs */
+        .section-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px;
+            border-radius: 30px;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-tabs::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            animation: shimmer 8s infinite linear;
+        }
+        
+        .section-tab {
+            flex: 1;
+            padding: 12px 20px;
+            text-align: center;
+            color: #bfdbfe;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .section-tab:hover {
+            background: rgba(59, 130, 246, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+        }
+        
+        .section-tab.active {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(96, 165, 250, 0.2));
+            color: white;
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+            transform: translateY(-2px);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 41, 79, 0.5);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #60a5fa, #93c5fd);
+        }
+        
+        /* Modal for appointee details */
+        .appointee-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .appointee-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, rgba(15, 41, 79, 0.95), rgba(30, 64, 175, 0.9));
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .appointee-modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        /* Stats Cards */
+        .stats-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%);
+            transform: rotate(45deg);
+            animation: shimmer 6s infinite linear;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
+        }
+        
+        .stats-number {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .appointees-grid {
+                gap: 20px;
+            }
+            
+            .appointee-photo {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .appointee-card {
+                width: 180px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .appointees-section {
+                padding-top: 80px;
+            }
+            
+            .appointees-grid {
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .appointee-photo {
+                width: 160px;
+                height: 160px;
+                animation: float 4s ease-in-out infinite;
+            }
+            
+            .appointee-card {
+                width: 160px;
+            }
+            
+            .appointee-name {
+                font-size: 1rem;
+            }
+            
+            .appointee-position {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .appointees-grid {
+                gap: 12px;
+            }
+            
+            .appointee-photo {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .appointee-card {
+                width: 140px;
+            }
+            
+            .appointee-name {
+                font-size: 0.9rem;
+            }
+            
+            .position-badge {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+            }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Floating Particles -->
+    <div class="particle w-64 h-64 top-10 left-10" style="animation-delay: 0s"></div>
+    <div class="particle w-48 h-48 bottom-10 right-10" style="animation-delay: 2s"></div>
+    <div class="particle w-32 h-32 top-1/2 left-1/4" style="animation-delay: 4s"></div>
+    <div class="particle w-40 h-40 top-1/4 right-1/4" style="animation-delay: 6s"></div>
+    
+    <!----------- Navigation Bar ----------->
+
+    <nav class="glass-nav fixed w-full z-50 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo section now clickable -->
+                <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                    <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-blue-400 shadow-lg animate-float">
+                        <img src="img/logo.jpg" alt="SVCI-SHS SSG Logo" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h1 class="heading-font text-xl font-bold animate-fade-in">SVCI-SHS SSG</h1>
+                        <p class="text-xs text-blue-300 animate-fade-in" style="animation-delay: 0.2s">Marshals Division</p>
+                    </div>
+                </a>
+                
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <a href="all-officers.html" class="font-medium hover:text-red-300 transition flex items-center space-x-2 animate-fade-in" style="animation-delay: 0.3s">
+                        <i class="fas fa-users"></i>
+                        <span class="hidden md:inline">All Officers</span>
+                    </a>
+                    
+                    <a href="marshals.html" class="font-medium hover:text-red-300 transition flex items-center space-x-2 animate-fade-in" style="animation-delay: 0.4s">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="hidden md:inline">Marshals</span>
+                    </a>
+                    
+                    <a href="index.html" class="font-medium hover:text-red-300 transition flex items-center space-x-2 animate-fade-in" style="animation-delay: 0.5s">
+                        <i class="fas fa-home"></i>
+                        <span class="hidden md:inline">Back to Home</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Appointees Section -->
+    <section class="appointees-section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <h1 class="heading-font text-5xl md:text-6xl font-bold mb-4 white-text animate-fade-up">SSG Appointees</h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-blue-400 to-blue-600 mx-auto mb-6 animate-fade-up" style="animation-delay: 0.2s"></div>
+                <p class="text-xl text-blue-200 max-w-3xl mx-auto animate-fade-up" style="animation-delay: 0.4s">
+                    The dedicated appointed officers serving various committees of the SVCI Senior High School Supreme Student Government
+                </p>
+            </div>
+
+            <!-- Section Tabs -->
+            <div class="section-tabs animate-fade-up" style="animation-delay: 0.6s">
+                <div class="section-tab active" data-section="appointees">All Appointees</div>
+            </div>
+
+            <!-- Appointees Grid - Cards from left to right -->
+            <div class="appointees-grid" id="appointees-grid">
+                <!-- Appointee 1 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/21.png" alt="1.	Jevy Paul M. Tubigon ">
+                        
+                    </div>
+                    <div class="appointee-name">JEVY PAUL M. TUBIGON</div>
+                    <div class="appointee-position">Assistant President</div>
+                </div>
+
+                <!-- Appointee 2 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/22.png" alt="1.	Blaier Alexandria D. Taporco">
+                        
+                    </div>
+                    <div class="appointee-name">BLAIER ALEXANDRIA D. TAPORCO</div>
+                    <div class="appointee-position">Spokesperson/Representative</div>
+                </div>
+
+                <!-- Appointee 3 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/23.png" alt="1.	Leanna Marie M. Bantilan ">
+                        
+                    </div>
+                    <div class="appointee-name">LEANNA MARIE M. BANTILAN</div>
+                    <div class="appointee-position">Assistant Vice President</div>
+                </div>
+
+                <!-- Appointee 4 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/24.png" alt="Niel Ryan O. Esolana ">
+                        
+                    </div>
+                    <div class="appointee-name">NIEL RYAN O. ESOLANA</div>
+                    <div class="appointee-position">Spokesperson/Vice Representative</div>
+                </div>
+
+                <!-- Appointee 5 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/25.png" alt="Jeff B. Laurie ">
+                        
+                    </div>
+                    <div class="appointee-name">JEFF B. LAURIE</div>
+                    <div class="appointee-position">Logistics, Communications, and Referral Department</div>
+                </div>
+
+                <!-- Appointee 6 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/26.png" alt="Dana Ysabelle F. Nazareth ">
+                        
+                    </div>
+                    <div class="appointee-name">DANA YSABELLE F. NAZARETH</div>
+                    <div class="appointee-position">Letters, Legislatives, and Enactments Department</div>
+                </div>
+
+                <!-- Appointee 7 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/27.png" alt="Ivory Josh C. Bustaliño ">
+                        
+                    </div>
+                    <div class="appointee-name">IVORY JOSH C. BUSTALIÑO</div>
+                    <div class="appointee-position">Agenda, Minutes, and Journals Department</div>
+                </div>
+
+                <!-- Appointee 8 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/28.png" alt="Geo Cielo S. Salmorin ">
+                        
+                    </div>
+                    <div class="appointee-name">GEO CILO S. SALMORIN</div>
+                    <div class="appointee-position">Student to Government Finance Handling Committee</div>
+                </div>
+
+                <!-- Appointee 9 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/29.png" alt="Rianni Jaz F. Villeta ">
+                        
+                    </div>
+                    <div class="appointee-name">RIANNI JAZ F. VILLETAS</div>
+                    <div class="appointee-position">Student to Government Finance Handling Committee</div>
+                </div>
+
+                <!-- Appointee 10 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/30.png" alt="TRISHA W. BENONG">
+                        
+                    </div>
+                    <div class="appointee-name">TRISHA W. BENONG</div>
+                    <div class="appointee-position">Student to Government Finance Handling Committee</div>
+                </div>
+
+                <!-- Appointee 11 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/56.png" alt="Naiara C. Ebal">
+                        
+                    </div>
+                    <div class="appointee-name">NAIARA C. EBAL</div>
+                    <div class="appointee-position">Financial Documentations Committee</div>
+                </div>
+
+                <!-- Appointee 12 -->
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/31.png" alt="Hashley D. Manalocon">
+                        
+                    </div>
+                    <div class="appointee-name">HASHLEY D. MANALOCON</div>
+                    <div class="appointee-position">Student Affairs Auditing Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/32.png" alt="Isabel Grace C. Buljatin ">
+                        
+                    </div>
+                    <div class="appointee-name">ISABEL GRACE C. BULJATIN</div>
+                    <div class="appointee-position">Student Affairs Auditing Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/33.png" alt="Shenem Ann B. Silorio ">
+                        
+                    </div>
+                    <div class="appointee-name">SHENEM ANN B. SILOVIO</div>
+                    <div class="appointee-position">Reports and Liquidations Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/34.png" alt="Precious Gjuadha Divine Marañon ">
+                        
+                    </div>
+                    <div class="appointee-name">PRECIOUS GJUADHA DIVINE MARAÑON</div>
+                    <div class="appointee-position">Reports and Liquidations Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/35.png" alt="Kathlyn S. Salasayo ">
+                        
+                    </div>
+                    <div class="appointee-name">KATHLYN S. SALASAYO</div>
+                    <div class="appointee-position">Office of Internal Affairs</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/36.png" alt="Rob Charls L. Retes ">
+                        
+                    </div>
+                    <div class="appointee-name">ROB CHARLS L. RETES</div>
+                    <div class="appointee-position">Office of External Affairs</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/37.png" alt="Muneera Ahmed R. Al Sieh ">
+                        
+                    </div>
+                    <div class="appointee-name">MUNEERA AHMED R. AL SIEH</div>
+                    <div class="appointee-position">Office of Dissemination and Student Networking</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/38.png" alt="Mary Villafer M. Mesario">
+                        
+                    </div>
+                    <div class="appointee-name">MARY VILLAFER M. MESARIO</div>
+                    <div class="appointee-position">Office of Internal Affairs</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/39.png" alt="Chriss Aindrea C. Miranda ">
+                        
+                    </div>
+                    <div class="appointee-name">CHRIS AINDREA C. MIRANDA</div>
+                    <div class="appointee-position">Office of External Affairs</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/40.png" alt="Maria Sophia S. Abrea">
+                        
+                    </div>
+                    <div class="appointee-name">MARIA SOPHIA S. ABREA</div>
+                    <div class="appointee-position">Office of Dissemination and Student Networking</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/41.png" alt="Kiera Nicole Uy ">
+                        
+                    </div>
+                    <div class="appointee-name">KIERA NICOLE U. UY</div>
+                    <div class="appointee-position">Brandkit and Managing Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/42.png" alt="Andrei A. Adolfo">
+                        
+                    </div>
+                    <div class="appointee-name">ANDREI A. ADOLFO</div>
+                    <div class="appointee-position">Brandkit and Managing Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/43.png" alt="Kim V. Capito ">
+                        
+                    </div>
+                    <div class="appointee-name">KIM V. CAPITO</div>
+                    <div class="appointee-position">Strategy Engineering Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/44.png" alt="Lordy C. Palpagan ">
+                        
+                    </div>
+                    <div class="appointee-name">LORDY C. PALPAGAN</div>
+                    <div class="appointee-position">Strategy Engineering Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/45.png" alt="Jan Ryand P. Gallego ">
+                        
+                    </div>
+                    <div class="appointee-name">JAN RYAND P. GALLEGO</div>
+                    <div class="appointee-position">Strategy Engineering Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/46.png" alt="Mae Ann Gerlie N. Paghacian ">
+                        
+                    </div>
+                    <div class="appointee-name">MAE ANN GERLIE N. PAGHACIAN</div>
+                    <div class="appointee-position">Strategy Engineering Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/47.png" alt="Feliz Marie B. Mabuting ">
+                        
+                    </div>
+                    <div class="appointee-name">FELIZ MARIE B. MABUTING</div>
+                    <div class="appointee-position">Strategy Engineering Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/48.png" alt="Angel C. Redillas">
+                        
+                    </div>
+                    <div class="appointee-name">ANGEL C. REDILLAS</div>
+                    <div class="appointee-position">Strategy Engineering Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/49.png" alt="Johnry A. Aplaca">
+                        
+                    </div>
+                    <div class="appointee-name">JOHNRY A. APLACA</div>
+                    <div class="appointee-position">Student Issues, Science Affairs, and Attendance Checking Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/50.png" alt="Angel Ann B. Bation ">
+                        
+                    </div>
+                    <div class="appointee-name">ANGEL ANN B. BATION</div>
+                    <div class="appointee-position">Student Issues, Science Affairs, and Attendance Checking Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/51.png" alt="Andrea May M. Pandac ">
+                        
+                    </div>
+                    <div class="appointee-name">ANDREA MAY M. PANDAC</div>
+                    <div class="appointee-position">Student Issues, Rules & Regulations, and Attendance Checking Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/52.png" alt="Jel B. Capinig ">
+                        
+                    </div>
+                    <div class="appointee-name">JEL B. CAPINIG</div>
+                    <div class="appointee-position">Student Issues, Financial Concerns, and Attendance Checking Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/53.png" alt="Arfie James S. Alabastro ">
+                        
+                    </div>
+                    <div class="appointee-name">ARFIE JAMES S. ALABASTRO</div>
+                    <div class="appointee-position">Student Issues, Science Affairs, and Attendance Checking Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/57.png" alt="January Joy C. Racelis">
+                        
+                    </div>
+                    <div class="appointee-name">JANUARY JOY C. RACELIS</div>
+                    <div class="appointee-position">Student Issues, Science Affairs, and Attendance Checking Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/54.png" alt="Hanna Jyra M. Telos ">
+                        
+                    </div>
+                    <div class="appointee-name">HANNA JYRA M. TELOS</div>
+                    <div class="appointee-position">Student Issues, Rules & Regulations, and Attendance Checking Committee</div>
+                </div>
+
+                <div class="appointee-card" data-section="appointees">
+                    <div class="appointee-photo">
+                        <img src="img/id/appointees/55.png" alt="	Xxyl Rose A. Hangcan ">
+                        
+                    </div>
+                    <div class="appointee-name">XXYL ROSE A. HANGCAN</div>
+                    <div class="appointee-position">Student Issues, Financial Concerns, and Attendance Checking Committee</div>
+                </div>
+            </div>
+
+            <!-- Appointees Information Section -->
+            <div class="max-w-4xl mx-auto mt-16 animate-fade-up" style="animation-delay: 0.8s">
+                <div class="glass-card rounded-3xl p-10 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 animate-pulse"></div>
+                    
+                    <h2 class="heading-font text-4xl font-bold mb-8 text-center gradient-text">About the Appointees Division</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                        <div class="animate-fade-left" style="animation-delay: 1s">
+                            <h3 class="text-2xl font-bold mb-6 text-blue-300">Our Role and Responsibilities</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start transform transition-transform hover:translate-x-2">
+                                    <div class="w-8 h-8 rounded-full bg-blue-800/50 flex items-center justify-center mr-4 flex-shrink-0 mt-1 animate-pulse">
+                                        <i class="fas fa-hands-helping text-blue-300"></i>
+                                    </div>
+                                    <span class="text-lg text-blue-100">Assist in implementing various SSG programs and projects</span>
+                                </li>
+                                <li class="flex items-start transform transition-transform hover:translate-x-2" style="animation-delay: 0.1s">
+                                    <div class="w-8 h-8 rounded-full bg-blue-800/50 flex items-center justify-center mr-4 flex-shrink-0 mt-1 animate-pulse" style="animation-delay: 0.2s">
+                                        <i class="fas fa-clipboard-check text-blue-300"></i>
+                                    </div>
+                                    <span class="text-lg text-blue-100">Support committee heads in their respective functions</span>
+                                </li>
+                                <li class="flex items-start transform transition-transform hover:translate-x-2" style="animation-delay: 0.2s">
+                                    <div class="w-8 h-8 rounded-full bg-blue-800/50 flex items-center justify-center mr-4 flex-shrink-0 mt-1 animate-pulse" style="animation-delay: 0.4s">
+                                        <i class="fas fa-tasks text-blue-300"></i>
+                                    </div>
+                                    <span class="text-lg text-blue-100">Execute assigned tasks from different SSG committees</span>
+                                </li>
+                                <li class="flex items-start transform transition-transform hover:translate-x-2" style="animation-delay: 0.3s">
+                                    <div class="w-8 h-8 rounded-full bg-blue-800/50 flex items-center justify-center mr-4 flex-shrink-0 mt-1 animate-pulse" style="animation-delay: 0.6s">
+                                        <i class="fas fa-users-cog text-blue-300"></i>
+                                    </div>
+                                    <span class="text-lg text-blue-100">Serve as liaisons between students and committee heads</span>
+                                </li>
+                                <li class="flex items-start transform transition-transform hover:translate-x-2" style="animation-delay: 0.4s">
+                                    <div class="w-8 h-8 rounded-full bg-blue-800/50 flex items-center justify-center mr-4 flex-shrink-0 mt-1 animate-pulse" style="animation-delay: 0.8s">
+                                        <i class="fas fa-lightbulb text-blue-300"></i>
+                                    </div>
+                                    <span class="text-lg text-blue-100">Provide innovative ideas for student welfare and development</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="text-center animate-fade-right" style="animation-delay: 1s">
+                            <div class="w-48 h-48 rounded-full border-4 border-blue-400/50 mx-auto overflow-hidden shadow-xl mb-6 animate-float">
+                                <div class="w-full h-full bg-gradient-to-br from-blue-900/70 to-blue-700/70 flex items-center justify-center">
+                                    <i class="fas fa-hands-helping text-8xl text-blue-300 animate-pulse"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-blue-300">Motto</h3>
+                            <p class="text-xl italic text-blue-200 animate-pulse">"Service with Excellence, Commitment with Heart"</p>
+                            
+                            <div class="glass-card p-4 mt-6 rounded-2xl">
+                                <h4 class="text-lg font-bold text-blue-300 mb-2">Appointee's Pledge</h4>
+                                <p class="text-blue-100 italic">
+                                    <i class="fas fa-quote-left text-blue-400 mr-2"></i>
+                                    We pledge to serve with dedication, contribute with passion, and support with loyalty to our Vincentian community
+                                    <i class="fas fa-quote-right text-blue-400 ml-2"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Footer -->
+            <div class="text-center mt-16 pt-8 border-t border-blue-800/30">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+                    <div class="stats-card glass-card p-6 rounded-2xl animate-fade-up" style="animation-delay: 1.2s">
+                        <div class="text-4xl font-bold text-blue-300 mb-2 stats-number">37</div>
+                        <div class="text-blue-200">Total Appointees</div>
+                    </div>
+                    <div class="stats-card glass-card p-6 rounded-2xl animate-fade-up" style="animation-delay: 1.4s">
+                        <div class="text-4xl font-bold text-blue-300 mb-2 stats-number">19</div>
+                        <div class="text-blue-200">Different Committees</div>
+                    </div>
+                    <div class="stats-card glass-card p-6 rounded-2xl animate-fade-up" style="animation-delay: 1.6s">
+                        <div class="text-4xl font-bold text-blue-300 mb-2 stats-number">100%</div>
+                        <div class="text-blue-200">Dedication to Service</div>
+                    </div>
+                </div>
+                <p class="text-blue-400 mt-6 italic animate-fade-up" style="animation-delay: 1.8s">
+                    <i class="fas fa-hands-helping mr-2 animate-pulse-slow"></i>
+                    Committed to serving the Vincentian community through various SSG committees
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for appointee details -->
+    <div class="appointee-modal" id="appointeeModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-blue-800/30">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0 animate-fade-up" style="animation-delay: 1.9s">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-400 animate-float">
+                            <img src="img/logo.jpg" alt="SVCI-SHS SSG Logo" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="heading-font text-lg font-bold">SVCI-SHS SSG</h3>
+                            <p class="text-xs text-blue-300">Appointees Division Gallery</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center animate-fade-up" style="animation-delay: 2s">
+                    <p class="text-blue-300">© 2024 SVCI Senior High School SSG</p>
+                    <p class="text-blue-400 text-sm mt-1">Academic Year 2025-2026</p>
+                </div>
+                
+                <div class="mt-4 md:mt-0 animate-fade-up" style="animation-delay: 2.1s">
+                    <a href="index.html" class="glass-card px-6 py-2 rounded-full hover:bg-blue-500/20 transition flex items-center space-x-2 hover:transform hover:scale-105">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover sound effect simulation and click animation
+            const appointeeCards = document.querySelectorAll('.appointee-card');
+            
+            appointeeCards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+                
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Click animation
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                    
+                    // Get appointee info
+                    const appointeeName = this.querySelector('.appointee-name').textContent;
+                    const appointeePosition = this.querySelector('.appointee-position').textContent;
+                    const appointeeImg = this.querySelector('img').src;
+                    
+                    // Create modal content
+                    const modalHTML = `
+                        <div class="text-center animate-fade-in">
+                            <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-blue-400 mx-auto mb-6 animate-float">
+                                <img src="${appointeeImg}" alt="${appointeeName}" class="w-full h-full object-cover">
+                            </div>
+                            <h2 class="heading-font text-2xl md:text-3xl font-bold mb-2 gradient-text">${appointeeName}</h2>
+                            <div class="text-lg md:text-xl text-blue-300 font-bold mb-4">${appointeePosition}</div>
+                            <div class="inline-block glass-card px-4 py-2 rounded-full mb-6" style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(96, 165, 250, 0.5);">
+                                <i class="fas fa-hands-helping mr-2"></i>
+                                <span class="text-white font-bold">SSG Appointee</span>
+                            </div>
+                            
+                            <div class="glass-card p-6 rounded-2xl mb-6">
+                                <p class="text-blue-100 mb-4 text-center">
+                                    Dedicated appointed officer serving the Vincentian community with excellence and commitment.
+                                </p>
+                                <div class="text-blue-200 italic border-l-4 border-blue-400 pl-4 py-2">
+                                    <i class="fas fa-quote-left text-blue-400 mr-2"></i>
+                                    Serving with passion, leading with heart
+                                    <i class="fas fa-quote-right text-blue-400 ml-2"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center glass-card p-4 rounded-xl">
+                                    <div class="text-2xl font-bold text-blue-300">${String(index + 1).padStart(2, '0')}</div>
+                                    <div class="text-sm text-blue-200">Appointee ID</div>
+                                </div>
+                                <div class="text-center glass-card p-4 rounded-xl">
+                                    <div class="text-2xl font-bold text-blue-300">AY 25-26</div>
+                                    <div class="text-sm text-blue-200">Term</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Update and show modal
+                    const modalContent = document.getElementById('modalContent');
+                    const appointeeModal = document.getElementById('appointeeModal');
+                    
+                    modalContent.innerHTML = modalHTML;
+                    appointeeModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Modal functionality
+            const appointeeModal = document.getElementById('appointeeModal');
+            const closeModal = document.getElementById('closeModal');
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                appointeeModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal on outside click
+            appointeeModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    appointeeModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && appointeeModal.classList.contains('active')) {
+                    appointeeModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Animate particles on scroll
+            const particles = document.querySelectorAll('.particle');
+            window.addEventListener('scroll', () => {
+                particles.forEach((particle, index) => {
+                    const speed = 0.3 + (index * 0.1);
+                    const yPos = window.scrollY * speed * 0.1;
+                    particle.style.transform = `translateY(${yPos}px)`;
+                });
+            });
+            
+            // Add scroll animation for cards
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('appointee-card')) {
+                            const index = Array.from(appointeeCards).indexOf(entry.target);
+                            entry.target.style.animation = `cardEnter 0.6s ease ${0.1 + (index * 0.05)}s forwards`;
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe cards for scroll animation
+            appointeeCards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVCI Senior High School Supreme Student Government - All Officers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('img/background.jpg') center center / cover fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 41, 79, 0.85) 0%, rgba(15, 41, 79, 0.7) 100%);
+            z-index: -1;
+        }
+        
+        .heading-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Glass morphism effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .glass-nav {
+            background: rgba(15, 41, 79, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes cardEnter {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .animate-gradient {
+            background: linear-gradient(90deg, #3b82f6, #93c5fd, #60a5fa, #3b82f6);
+            background-size: 300% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #93c5fd, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        /* All Officers Grid Styles */
+        .all-officers-section {
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+        
+        .officers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+        
+        .officer-card-grid {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
+            opacity: 0;
+            animation: cardEnter 0.6s ease forwards;
+        }
+        
+        .officer-card-grid:nth-child(1) { animation-delay: 0.1s; }
+        .officer-card-grid:nth-child(2) { animation-delay: 0.15s; }
+        .officer-card-grid:nth-child(3) { animation-delay: 0.2s; }
+        .officer-card-grid:nth-child(4) { animation-delay: 0.25s; }
+        .officer-card-grid:nth-child(5) { animation-delay: 0.3s; }
+        .officer-card-grid:nth-child(6) { animation-delay: 0.35s; }
+        .officer-card-grid:nth-child(7) { animation-delay: 0.4s; }
+        .officer-card-grid:nth-child(8) { animation-delay: 0.45s; }
+        .officer-card-grid:nth-child(9) { animation-delay: 0.5s; }
+        .officer-card-grid:nth-child(10) { animation-delay: 0.55s; }
+        .officer-card-grid:nth-child(11) { animation-delay: 0.6s; }
+        .officer-card-grid:nth-child(12) { animation-delay: 0.65s; }
+        .officer-card-grid:nth-child(13) { animation-delay: 0.7s; }
+        .officer-card-grid:nth-child(14) { animation-delay: 0.75s; }
+        .officer-card-grid:nth-child(15) { animation-delay: 0.8s; }
+        .officer-card-grid:nth-child(16) { animation-delay: 0.85s; }
+        .officer-card-grid:nth-child(17) { animation-delay: 0.9s; }
+        .officer-card-grid:nth-child(18) { animation-delay: 0.95s; }
+        .officer-card-grid:nth-child(19) { animation-delay: 1s; }
+        .officer-card-grid:nth-child(20) { animation-delay: 1.05s; }
+        
+        .officer-card-grid:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+        
+        .officer-card-grid:hover .officer-photo-grid {
+            border-color: rgba(59, 130, 246, 0.8);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+        }
+        
+        .officer-card-grid:hover .officer-name-grid {
+            color: #93c5fd;
+            transform: scale(1.05);
+        }
+        
+        .officer-card-grid:hover .officer-position-grid {
+            color: #60a5fa;
+        }
+        
+        .officer-photo-grid {
+            width: 180px;
+            height: 180px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.3), rgba(147, 197, 253, 0.2));
+            margin-bottom: 15px;
+            transition: all 0.4s ease;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .officer-photo-grid::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite linear;
+        }
+        
+        .officer-card-grid:hover .officer-photo-grid {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .officer-photo-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .officer-card-grid:hover .officer-photo-grid img {
+            transform: scale(1.1);
+        }
+        
+        .officer-name-grid {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 5px;
+            line-height: 1.3;
+            transition: all 0.3s ease;
+        }
+        
+        .officer-position-grid {
+            font-size: 0.9rem;
+            color: #93c5fd;
+            text-align: center;
+            font-weight: 500;
+            line-height: 1.2;
+            transition: all 0.3s ease;
+        }
+        
+        /* Section Tabs */
+        .section-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px;
+            border-radius: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-tabs::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            animation: shimmer 8s infinite linear;
+        }
+        
+        .section-tab {
+            flex: 1;
+            padding: 12px 20px;
+            text-align: center;
+            color: #93c5fd;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .section-tab:hover {
+            background: rgba(59, 130, 246, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+        }
+        
+        .section-tab.active {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(96, 165, 250, 0.2));
+            color: white;
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+            transform: translateY(-2px);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 41, 79, 0.5);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #60a5fa, #93c5fd);
+        }
+        
+        /* Modal for officer details */
+        .officer-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .officer-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, rgba(15, 41, 79, 0.95), rgba(30, 64, 175, 0.9));
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .officer-modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        /* Stats Cards */
+        .stats-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%);
+            transform: rotate(45deg);
+            animation: shimmer 6s infinite linear;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
+        }
+        
+        .stats-number {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .officers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 20px;
+            }
+            
+            .officer-photo-grid {
+                width: 160px;
+                height: 160px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .all-officers-section {
+                padding-top: 80px;
+            }
+            
+            .officers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .officer-photo-grid {
+                width: 140px;
+                height: 140px;
+                animation: float 4s ease-in-out infinite;
+            }
+            
+            .officer-name-grid {
+                font-size: 1rem;
+            }
+            
+            .officer-position-grid {
+                font-size: 0.8rem;
+            }
+            
+            .section-tabs {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+            }
+            
+            .section-tab {
+                white-space: nowrap;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .officers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 12px;
+            }
+            
+            .officer-photo-grid {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .officer-name-grid {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Floating Particles -->
+    <div class="particle w-64 h-64 top-10 left-10" style="animation-delay: 0s"></div>
+    <div class="particle w-48 h-48 bottom-10 right-10" style="animation-delay: 2s"></div>
+    <div class="particle w-32 h-32 top-1/2 left-1/4" style="animation-delay: 4s"></div>
+    <div class="particle w-40 h-40 top-1/4 right-1/4" style="animation-delay: 6s"></div>
+    
+    <!----------- Navigation Bar ----------->
+    <nav class="glass-nav fixed w-full z-50 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo section now clickable -->
+                <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                    <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-blue-400 shadow-lg animate-float">
+                        <img src="img/logo.jpg" alt="SVCI-SHS SSG Logo" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h1 class="heading-font text-xl font-bold animate-fade-in">SVCI-SHS SSG</h1>
+                        <p class="text-xs text-blue-300 animate-fade-in" style="animation-delay: 0.2s">Marshals Division</p>
+                    </div>
+                </a>
+                
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <a href="appointees.html" class="font-medium hover:text-red-300 transition flex items-center space-x-2 animate-fade-in" style="animation-delay: 0.3s">
+                        <i class="fas fa-user-plus"></i>
+                        <span class="hidden md:inline">Appointees</span>
+                    </a>
+                    
+                    <a href="marshals.html" class="font-medium hover:text-red-300 transition flex items-center space-x-2 animate-fade-in" style="animation-delay: 0.4s">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="hidden md:inline">Marshals</span>
+                    </a>
+                    
+                    <a href="index.html" class="font-medium hover:text-red-300 transition flex items-center space-x-2 animate-fade-in" style="animation-delay: 0.5s">
+                        <i class="fas fa-home"></i>
+                        <span class="hidden md:inline">Back to Home</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- All Officers Section -->
+    <section class="all-officers-section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <h1 class="heading-font text-5xl md:text-6xl font-bold mb-4 white-text animate-fade-up">All Officers</h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-blue-400 to-blue-600 mx-auto mb-6 animate-fade-up" style="animation-delay: 0.2s"></div>
+                <p class="text-xl text-blue-200 max-w-3xl mx-auto animate-fade-up" style="animation-delay: 0.4s">
+                    Complete lineup of student leaders for Academic Year 2025-2026
+                </p>
+            </div>
+
+            <!-- Section Tabs -->
+            <div class="section-tabs animate-fade-up" style="animation-delay: 0.6s">
+                <div class="section-tab active" data-section="all">All Officers</div>
+                <div class="section-tab" data-section="executive">Executive Board</div>
+                <div class="section-tab" data-section="representatives">Representatives</div>
+            </div>
+
+            <!-- Officers Grid -->
+            <div class="officers-grid" id="officers-grid">
+                <!-- Executive Board -->
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/0.png" alt="JUMBIE T. BANDA">
+                    </div>
+                    <div class="officer-name-grid">JUMBIE T. BANDA</div>
+                    <div class="officer-position-grid">SSG Adviser</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/1.png" alt="ELYSSA MAY E. BALLADARES">
+                    </div>
+                    <div class="officer-name-grid">ELYSSA MAY E. BALLADARES</div>
+                    <div class="officer-position-grid">President</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/2.png" alt="JANELLE C. CAGATAN">
+                    </div>
+                    <div class="officer-name-grid">JANELLE C. CAGATAN</div>
+                    <div class="officer-position-grid">Vice President</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/3.png" alt="MIEL KYLA M. JALOSJOS">
+                    </div>
+                    <div class="officer-name-grid">MIEL KYLA M. JALOSJOS</div>
+                    <div class="officer-position-grid">Secretary</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/4.png" alt="CHRISTLYN DAWN P. BUCTUAN">
+                    </div>
+                    <div class="officer-name-grid">CHRISTLYN DAWN P. BUCTUAN</div>
+                    <div class="officer-position-grid">Treasurer</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/5.png" alt="KRIZZA JOY M. DIONALDO">
+                    </div>
+                    <div class="officer-name-grid">KRIZZA JOY M. DIONALDO</div>
+                    <div class="officer-position-grid">Auditor</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/6.png" alt="CHARLIZE N. DARUNDAY">
+                    </div>
+                    <div class="officer-name-grid">CHARLIZE N. DARUNDAY</div>
+                    <div class="officer-position-grid">Press Information Officer</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/7.png" alt="HANNA GRACE B. ESCUADRO">
+                    </div>
+                    <div class="officer-name-grid">HANNA GRACE B. ESCUADRO</div>
+                    <div class="officer-position-grid">Press Information Officer</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/8.png" alt="KC T. OCHOTORENA">
+                    </div>
+                    <div class="officer-name-grid">KC T. OCHOTORENA</div>
+                    <div class="officer-position-grid">Business & Social Manager</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/9.png" alt="FRANCINE S. CASTAÑARES">
+                    </div>
+                    <div class="officer-name-grid">FRANCINE S. CASTAÑARES</div>
+                    <div class="officer-position-grid">Business & Social Manager</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/10.png" alt="JESSE LLOYD C. SILAGA">
+                    </div>
+                    <div class="officer-name-grid">JESSE LLOYD C. SILAGA</div>
+                    <div class="officer-position-grid">Sergeant-at-Arms</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="executive">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/11.png" alt="ALEXA MAY S. LABONG">
+                    </div>
+                    <div class="officer-name-grid">ALEXA MAY S. LABONG</div>
+                    <div class="officer-position-grid">Sergeant-at-Arms</div>
+                </div>
+
+                <!-- Grade 12 Representatives -->
+                <div class="officer-card-grid" data-section="representatives">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/12.png" alt="MARGARETTE ISLA B. BIHAG">
+                    </div>
+                    <div class="officer-name-grid">MARGARETTE ISLA B. BIHAG</div>
+                    <div class="officer-position-grid">12 - STEM Representative</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="representatives">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/13.png" alt="CRIS XYZIAN L. TUMPAG">
+                    </div>
+                    <div class="officer-name-grid">CRIS XYZIAN L. TUMPAG</div>
+                    <div class="officer-position-grid">12 - STEM Representative</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="representatives">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/14.png" alt="KIAN VINCENT F. CALAGO">
+                    </div>
+                    <div class="officer-name-grid">KIAN VINCENT F. CALAGO</div>
+                    <div class="officer-position-grid">12 - HUMSS Representative</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="representatives">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/15.png" alt="CLENIE MAY A. CO">
+                    </div>
+                    <div class="officer-name-grid">CLENIE MAY A. CO</div>
+                    <div class="officer-position-grid">12 - ABM Representative</div>
+                </div>
+
+                <!-- Grade 11 Representatives -->
+                <div class="officer-card-grid" data-section="representatives">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/16.png" alt="JANMICHELLE MARGAUX D. TIGLAO">
+                    </div>
+                    <div class="officer-name-grid">JANMICHELLE MARGAUX D. TIGLAO</div>
+                    <div class="officer-position-grid">11 - Science Medicine Representative</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="representatives">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/17.png" alt="PRINCESS EIA JZL J. OMANDAM">
+                    </div>
+                    <div class="officer-name-grid">PRINCESS EIA JZL J. OMANDAM</div>
+                    <div class="officer-position-grid">11 - Science Engineering Representative</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="representatives">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/18.png" alt="KRISTINE T. SAGAN">
+                    </div>
+                    <div class="officer-name-grid">KRISTINE T. SAGAN</div>
+                    <div class="officer-position-grid">11 - Social Science Representative</div>
+                </div>
+
+                <div class="officer-card-grid" data-section="representatives">
+                    <div class="officer-photo-grid">
+                        <img src="img/id/19.png" alt="MARIA SOPHIA O. LAÑOSO">
+                    </div>
+                    <div class="officer-name-grid">MARIA SOPHIA O. LAÑOSO</div>
+                    <div class="officer-position-grid">11 - Business & Entrepreneurship Representative</div>
+                </div>
+            </div>
+
+            <!-- Stats Footer -->
+            <div class="text-center mt-16 pt-8 border-t border-blue-800/30">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+                    <div class="stats-card glass-card p-6 rounded-2xl animate-fade-up" style="animation-delay: 1.1s">
+                        <div class="text-4xl font-bold text-blue-300 mb-2 stats-number">20</div>
+                        <div class="text-blue-200">Total Officers</div>
+                    </div>
+                    <div class="stats-card glass-card p-6 rounded-2xl animate-fade-up" style="animation-delay: 1.3s">
+                        <div class="text-4xl font-bold text-blue-300 mb-2 stats-number">12</div>
+                        <div class="text-blue-200">Executive Board</div>
+                    </div>
+                    <div class="stats-card glass-card p-6 rounded-2xl animate-fade-up" style="animation-delay: 1.5s">
+                        <div class="text-4xl font-bold text-blue-300 mb-2 stats-number">8</div>
+                        <div class="text-blue-200">Representatives</div>
+                    </div>
+                </div>
+                <p class="text-blue-400 mt-6 italic animate-fade-up" style="animation-delay: 1.7s">
+                    <i class="fas fa-users mr-2 animate-pulse-slow"></i>
+                    Serving the Vincentian community with dedication and passion
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for officer details -->
+    <div class="officer-modal" id="officerModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-blue-800/30">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0 animate-fade-up" style="animation-delay: 1.8s">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-400">
+                            <img src="img/logo.jpg" alt="SVCI-SHS SSG Logo" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="heading-font text-lg font-bold">SVCI-SHS SSG</h3>
+                            <p class="text-xs text-blue-300">All Officers Gallery</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center animate-fade-up" style="animation-delay: 1.9s">
+                    <p class="text-blue-300">© 2024 SVCI Senior High School SSG</p>
+                    <p class="text-blue-400 text-sm mt-1">Academic Year 2025-2026</p>
+                </div>
+                
+                <div class="mt-4 md:mt-0 animate-fade-up" style="animation-delay: 2s">
+                    <a href="index.html" class="glass-card px-6 py-2 rounded-full hover:bg-blue-500/20 transition flex items-center space-x-2 hover:transform hover:scale-105">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Section filtering
+            const sectionTabs = document.querySelectorAll('.section-tab');
+            const officerCards = document.querySelectorAll('.officer-card-grid');
+            
+            sectionTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Update active tab with animation
+                    sectionTabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.style.transform = 'translateY(0)';
+                    });
+                    this.classList.add('active');
+                    
+                    const section = this.dataset.section;
+                    
+                    // Animate cards out
+                    officerCards.forEach(card => {
+                        if (section === 'all' || card.dataset.section === section) {
+                            setTimeout(() => {
+                                card.style.display = 'block';
+                                card.style.animation = 'cardEnter 0.6s ease forwards';
+                            }, 100);
+                        } else {
+                            card.style.animation = 'fadeInUp 0.4s ease reverse forwards';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 400);
+                        }
+                    });
+                });
+            });
+            
+            // Add hover sound effect simulation and click animation
+            officerCards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+                
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Click animation
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                    
+                    // Get officer info
+                    const officerName = this.querySelector('.officer-name-grid').textContent;
+                    const officerPosition = this.querySelector('.officer-position-grid').textContent;
+                    const officerImg = this.querySelector('img').src;
+                    
+                    // Create modal content
+                    const modalHTML = `
+                        <div class="text-center animate-fade-in">
+                            <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-blue-400 mx-auto mb-6 animate-float">
+                                <img src="${officerImg}" alt="${officerName}" class="w-full h-full object-cover">
+                            </div>
+                            <h2 class="heading-font text-2xl md:text-3xl font-bold mb-2 gradient-text">${officerName}</h2>
+                            <div class="text-lg md:text-xl text-blue-300 font-bold mb-4">${officerPosition}</div>
+                            
+                            <div class="glass-card p-6 rounded-2xl mb-6">
+                                <p class="text-blue-100 mb-4 text-center">
+                                    ${this.dataset.section === 'executive' ? 'Executive Board Member of SVCI-SHS SSG, serving with dedication and commitment to lead the student body.' : 
+                                      this.dataset.section === 'representatives' ? 'Class Representative of SVCI-SHS SSG, representing student interests and concerns with passion and integrity.' : 
+                                      'Dedicated Vincentian leader serving the student community with passion and commitment.'}
+                                </p>
+                                <div class="text-blue-200 italic border-l-4 border-blue-400 pl-4 py-2">
+                                    <i class="fas fa-quote-left text-blue-400 mr-2"></i>
+                                    ${this.dataset.section === 'executive' ? 'Leading with vision, serving with heart' : 
+                                      this.dataset.section === 'representatives' ? 'Voicing student concerns, representing with passion' : 
+                                      'Serving with honor, leading with heart'}
+                                    <i class="fas fa-quote-right text-blue-400 ml-2"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center glass-card p-4 rounded-xl">
+                                    <div class="text-2xl font-bold text-blue-300">${String(index + 1).padStart(2, '0')}</div>
+                                    <div class="text-sm text-blue-200">Officer ID</div>
+                                </div>
+                                <div class="text-center glass-card p-4 rounded-xl">
+                                    <div class="text-2xl font-bold text-blue-300">AY 25-26</div>
+                                    <div class="text-sm text-blue-200">Term</div>
+                                </div>
+                            </div>
+                            
+                            ${this.dataset.section === 'executive' ? `
+                            <div class="glass-card p-4 mt-4 rounded-xl">
+                                <h4 class="text-lg font-bold text-blue-300 mb-2">Key Responsibilities</h4>
+                                <ul class="text-left text-blue-100 text-sm space-y-1">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-blue-400 mr-2"></i>
+                                        <span>Lead and represent the student body</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-blue-400 mr-2"></i>
+                                        <span>Coordinate SSG activities and programs</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-blue-400 mr-2"></i>
+                                        <span>Serve as liaison between students and administration</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-blue-400 mr-2"></i>
+                                        <span>Ensure smooth operations of SSG functions</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            ` : this.dataset.section === 'representatives' ? `
+                            <div class="glass-card p-4 mt-4 rounded-xl">
+                                <h4 class="text-lg font-bold text-blue-300 mb-2">Key Responsibilities</h4>
+                                <ul class="text-left text-blue-100 text-sm space-y-1">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-blue-400 mr-2"></i>
+                                        <span>Represent class/section concerns to the SSG</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-blue-400 mr-2"></i>
+                                        <span>Communicate SSG initiatives to constituents</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-blue-400 mr-2"></i>
+                                        <span>Participate in SSG meetings and activities</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-blue-400 mr-2"></i>
+                                        <span>Gather feedback from fellow students</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            ` : ''}
+                        </div>
+                    `;
+                    
+                    // Update and show modal
+                    const modalContent = document.getElementById('modalContent');
+                    const officerModal = document.getElementById('officerModal');
+                    
+                    modalContent.innerHTML = modalHTML;
+                    officerModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Modal functionality
+            const officerModal = document.getElementById('officerModal');
+            const closeModal = document.getElementById('closeModal');
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                officerModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal on outside click
+            officerModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    officerModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && officerModal.classList.contains('active')) {
+                    officerModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Animate particles on scroll
+            const particles = document.querySelectorAll('.particle');
+            window.addEventListener('scroll', () => {
+                particles.forEach((particle, index) => {
+                    const speed = 0.3 + (index * 0.1);
+                    const yPos = window.scrollY * speed * 0.1;
+                    particle.style.transform = `translateY(${yPos}px)`;
+                });
+            });
+            
+            // Add scroll animation for cards
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'cardEnter 0.6s ease forwards';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe cards for scroll animation
+            officerCards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

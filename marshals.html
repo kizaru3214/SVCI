@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVCI Senior High School SSG - Marshals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('img/background.jpg') center center / cover fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 41, 79, 0.85) 0%, rgba(15, 41, 79, 0.7) 100%);
+            z-index: -1;
+        }
+        
+        .heading-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Glass morphism effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .glass-nav {
+            background: rgba(15, 41, 79, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes cardEnter {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes slideFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+        
+        @keyframes slideFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+        
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .animate-gradient {
+            background: linear-gradient(90deg, #dc2626, #f87171, #f87171, #dc2626);
+            background-size: 300% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #dc2626, #f87171, #f87171);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        /* Marshals Grid Styles */
+        .marshals-section {
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+        
+        .marshals-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 25px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .marshal-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
+            opacity: 0;
+            animation: cardEnter 0.6s ease forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        /* Left-to-right staggered animations */
+        .marshal-card:nth-child(10n+1),
+        .marshal-card:nth-child(10n+2),
+        .marshal-card:nth-child(10n+3),
+        .marshal-card:nth-child(10n+4),
+        .marshal-card:nth-child(10n+5) {
+            animation-name: slideFromLeft;
+        }
+        
+        .marshal-card:nth-child(10n+6),
+        .marshal-card:nth-child(10n+7),
+        .marshal-card:nth-child(10n+8),
+        .marshal-card:nth-child(10n+9),
+        .marshal-card:nth-child(10n+10) {
+            animation-name: slideFromRight;
+        }
+        
+        /* Stagger delays */
+        .marshal-card:nth-child(1) { animation-delay: 0.1s; }
+        .marshal-card:nth-child(2) { animation-delay: 0.15s; }
+        .marshal-card:nth-child(3) { animation-delay: 0.2s; }
+        .marshal-card:nth-child(4) { animation-delay: 0.25s; }
+        .marshal-card:nth-child(5) { animation-delay: 0.3s; }
+        .marshal-card:nth-child(6) { animation-delay: 0.35s; }
+        .marshal-card:nth-child(7) { animation-delay: 0.4s; }
+        .marshal-card:nth-child(8) { animation-delay: 0.45s; }
+        .marshal-card:nth-child(9) { animation-delay: 0.5s; }
+        .marshal-card:nth-child(10) { animation-delay: 0.55s; }
+        .marshal-card:nth-child(11) { animation-delay: 0.6s; }
+        .marshal-card:nth-child(12) { animation-delay: 0.65s; }
+        .marshal-card:nth-child(13) { animation-delay: 0.7s; }
+        .marshal-card:nth-child(14) { animation-delay: 0.75s; }
+        .marshal-card:nth-child(15) { animation-delay: 0.8s; }
+        .marshal-card:nth-child(16) { animation-delay: 0.85s; }
+        .marshal-card:nth-child(17) { animation-delay: 0.9s; }
+        .marshal-card:nth-child(18) { animation-delay: 0.95s; }
+        .marshal-card:nth-child(19) { animation-delay: 1.0s; }
+        .marshal-card:nth-child(20) { animation-delay: 1.05s; }
+        .marshal-card:nth-child(21) { animation-delay: 1.1s; }
+        .marshal-card:nth-child(22) { animation-delay: 1.15s; }
+        
+        .marshal-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+        
+        .marshal-card:hover .marshal-photo {
+            border-color: rgba(220, 38, 38, 0.8);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.4);
+        }
+        
+        .marshal-card:hover .marshal-name {
+            color: #fecaca;
+            transform: scale(1.05);
+        }
+        
+        .marshal-card:hover .marshal-position {
+            color: #f87171;
+        }
+        
+        .marshal-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            background: linear-gradient(45deg, rgba(220, 38, 38, 0.3), rgba(248, 113, 113, 0.2));
+            margin-bottom: 15px;
+            transition: all 0.4s ease;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .marshal-photo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite linear;
+        }
+        
+        .marshal-card:hover .marshal-photo {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .marshal-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .marshal-card:hover .marshal-photo img {
+            transform: scale(1.1);
+        }
+        
+        /* REMOVED POSITION BADGE */
+        
+        .marshal-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            transition: all 0.3s ease;
+            width: 100%;
+            padding: 0 10px;
+        }
+        
+        .marshal-position {
+            font-size: 0.95rem;
+            color: #fecaca;
+            text-align: center;
+            font-weight: 500;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+            width: 100%;
+            padding: 0 10px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Section Tabs */
+        .section-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px;
+            border-radius: 30px;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-tabs::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.1), transparent);
+            animation: shimmer 8s infinite linear;
+        }
+        
+        .section-tab {
+            flex: 1;
+            padding: 12px 20px;
+            text-align: center;
+            color: #fecaca;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .section-tab:hover {
+            background: rgba(220, 38, 38, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.2);
+        }
+        
+        .section-tab.active {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.3), rgba(248, 113, 113, 0.2));
+            color: white;
+            border: 1px solid rgba(220, 38, 38, 0.5);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
+            transform: translateY(-2px);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* Platoon Headers */
+        .platoon-header {
+            text-align: center;
+            margin: 40px 0 20px;
+            position: relative;
+        }
+        
+        .platoon-title {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(30, 64, 175, 0.2));
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        .platoon-subtitle {
+            color: #f87171;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 41, 79, 0.5);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #dc2626, #f87171);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #f87171, #fecaca);
+        }
+        
+        /* Modal for marshal details */
+        .marshal-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .marshal-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, rgba(15, 41, 79, 0.95), rgba(30, 64, 175, 0.9));
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .marshal-modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        /* Stats Cards */
+        .stats-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(220, 38, 38, 0.1) 50%, transparent 70%);
+            transform: rotate(45deg);
+            animation: shimmer 6s infinite linear;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(220, 38, 38, 0.3);
+        }
+        
+        .stats-number {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.3) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .marshals-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .marshals-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+            
+            .marshal-photo {
+                width: 180px;
+                height: 180px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .marshals-section {
+                padding-top: 80px;
+            }
+            
+            .marshals-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .marshal-photo {
+                width: 160px;
+                height: 160px;
+                animation: float 4s ease-in-out infinite;
+            }
+            
+            .marshal-name {
+                font-size: 1rem;
+            }
+            
+            .marshal-position {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .marshals-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .marshal-photo {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .marshal-name {
+                font-size: 0.9rem;
+            }
+            
+            .marshal-position {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .marshals-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+            
+            .marshal-photo {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Floating Particles -->
+    <div class="particle w-64 h-64 top-10 left-10" style="animation-delay: 0s"></div>
+    <div class="particle w-48 h-48 bottom-10 right-10" style="animation-delay: 2s"></div>
+    <div class="particle w-32 h-32 top-1/2 left-1/4" style="animation-delay: 4s"></div>
+    <div class="particle w-40 h-40 top-1/4 right-1/4" style="animation-delay: 6s"></div>
+    
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full z-50 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo section now clickable -->
+                <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                    <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-red-400 shadow-lg animate-float">
+                        <img src="img/logo.jpg" alt="SVCI-SHS SSG Logo" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h1 class="heading-font text-xl font-bold animate-fade-in">SVCI-SHS SSG</h1>
+                        <p class="text-xs text-red-300 animate-fade-in" style="animation-delay: 0.2s">Marshals Division</p>
+                    </div>
+                </a>
+                
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <a href="all-officers.html" class="font-medium hover:text-red-300 transition flex items-center space-x-2 animate-fade-in" style="animation-delay: 0.3s">
+                        <i class="fas fa-users"></i>
+                        <span class="hidden md:inline">All Officers</span>
+                    </a>
+                    
+                    <a href="appointees.html" class="font-medium hover:text-red-300 transition flex items-center space-x-2 animate-fade-in" style="animation-delay: 0.4s">
+                        <i class="fas fa-user-plus"></i>
+                        <span class="hidden md:inline">Appointees</span>
+                    </a>
+                    
+                    <a href="index.html" class="font-medium hover:text-red-300 transition flex items-center space-x-2 animate-fade-in" style="animation-delay: 0.5s">
+                        <i class="fas fa-home"></i>
+                        <span class="hidden md:inline">Back to Home</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Marshals Section -->
+    <section class="marshals-section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <h1 class="heading-font text-5xl md:text-6xl font-bold mb-4 white-text animate-fade-up">SSG Marshals</h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-red-400 to-red-600 mx-auto mb-6 animate-fade-up" style="animation-delay: 0.2s"></div>
+                <p class="text-xl text-red-200 max-w-3xl mx-auto animate-fade-up" style="animation-delay: 0.4s">
+                    The dedicated peacekeepers and discipline officers organized into specialized platoons
+                </p>
+            </div>
+
+
+            <!-- Cadet Corps Platoon -->
+            <div class="platoon-header">
+                <div class="platoon-title">Vanguards Platoon</div>
+                <div class="platoon-subtitle">Guardians of Discipline and Order</div>
+            </div>
+
+            <div class="marshals-grid" id="vanguard">
+                <!-- Vanguard Captain -->
+                <div class="marshal-card" data-platoon="vanguard">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/12.png" alt="Allan D. Senogat, Jr.">
+                    </div>
+                    <div class="marshal-name">ALLAN D. SENOGAT, JR.</div>
+                    <div class="marshal-position">Vanguards - Captain </div>
+                </div>
+
+                <!-- Cadet Corps Vice Captain -->
+                <div class="marshal-card" data-platoon="vanguard">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/13.png" alt="EARL P. BAGUNDOL">
+                    </div>
+                    <div class="marshal-name">EARL P. BAGUNDOL</div>
+                    <div class="marshal-position">Vanguards - Vice Captain</div>
+                </div>
+
+                <!-- Cadet Corps Members -->
+                <div class="marshal-card" data-platoon="derivantures">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/14.png" alt="Philip s. tacbaya">
+                    </div>
+                    <div class="marshal-name">PHILIP S. TACBAYA</div>
+                    <div class="marshal-position">Vanguards </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="cadet-corps">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/15.png" alt="Santino sora p. dy">
+                    </div>
+                    <div class="marshal-name">SANTINO SORA P. DY</div>
+                    <div class="marshal-position">Vanguards </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="cadet-corps">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/16.png" alt="AITHANE MICHAEL SAM P.  PATACSIL">
+                    </div>
+                    <div class="marshal-name">AITHANE MICHAEL SAM P. PATACSIL</div>
+                    <div class="marshal-position">Vanguards </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="cadet-corps">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/17.png" alt="KIM JEREMIAH M. BATOY">
+                    </div>
+                    <div class="marshal-name">KIM JEREMIAH M. BATOY</div>
+                    <div class="marshal-position">Vanguards </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="cadet-corps">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/18.png" alt="QUEENIE LEN R. DAGOY">
+                    </div>
+                    <div class="marshal-name">QUEENIE LEN R. DAGOY</div>
+                    <div class="marshal-position">Vanguards </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="cadet-corps">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/19.png" alt="DAVID C. FLORES">
+                    </div>
+                    <div class="marshal-name">DAVID C. FLORES</div>
+                    <div class="marshal-position">Vanguards </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="cadet-corps">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/20.png" alt="FRITZ CURBY G. SELIM">
+                    </div>
+                    <div class="marshal-name">FRITZ CURBY G. SELIM</div>
+                    <div class="marshal-position">Vanguards </div>
+                </div>
+            </div>
+
+            <!-- Sentinels Platoon -->
+            <div class="platoon-header">
+                <div class="platoon-title">SENTINELS PLATOON</div>
+                <div class="platoon-subtitle">Watchers and Protectors</div>
+            </div>
+
+            <div class="marshals-grid" id="sentinels">
+                <!-- Sentinels Captain -->
+                <div class="marshal-card" data-platoon="sentinels">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/21.png" alt="HARISZA MAE T. BENITEZ">
+                    </div>
+                    <div class="marshal-name">HARISZA MAE T. BENITEZ</div>
+                    <div class="marshal-position">Sentinels - Captain</div>
+                </div>
+
+                <!-- Sentinels Vice Captain -->
+                <div class="marshal-card" data-platoon="sentinels">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/22.png" alt="PIERSEA ZALI B. SOLICAR">
+                    </div>
+                    <div class="marshal-name">PIERSEA ZALI B. SOLICAR</div>
+                    <div class="marshal-position">Sentinels - Vice Captain </div>
+                </div>
+
+                <!-- Sentinels Members -->
+                <div class="marshal-card" data-platoon="sentinels">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/23.png" alt="MARIE WYNN PEARL V. OBNIMAGA">
+                    </div>
+                    <div class="marshal-name">MARIE WYNN PEARL V. OBNIMAGA</div>
+                    <div class="marshal-position">Sentinels  </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="sentinels">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/24.png" alt="KENT JUSTINE J. ALIMPOLOS">
+                    </div>
+                    <div class="marshal-name">KENT JUSTINE J. ALIMPOLOS</div>
+                    <div class="marshal-position">Sentinels </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="sentinels">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/25.png" alt="JAY KRIS A. JARCIA">
+                    </div>
+                    <div class="marshal-name">JAY KRIS A. JARCIA</div>
+                    <div class="marshal-position">Sentinels </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="sentinels">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/26.png" alt="STEPHANIE A. ROMARATE">
+                    </div>
+                    <div class="marshal-name">STEPHANIE A. ROMARATE</div>
+                    <div class="marshal-position">Sentinels </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="sentinels">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/27.png" alt="GAVIN DALE P. CAYLAN">
+                    </div>
+                    <div class="marshal-name">GAVIN DALE P. CAYLAN</div>
+                    <div class="marshal-position">Sentinels</div>
+                </div>
+
+                <div class="marshal-card" data-platoon="sentinels">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/28.png" alt="GLEXXON A. YU">
+                    </div>
+                    <div class="marshal-name">GLEXXON A. YU</div>
+                    <div class="marshal-position">Sentinels </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="sentinels">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/29.png" alt="SHIANA JANE CAMPOSO">
+                    </div>
+                    <div class="marshal-name">SHIANA JANE CAMPOSO</div>
+                    <div class="marshal-position">Sentinels </div>
+                </div>
+            </div>
+
+            <!-- Derivantures Platoon -->
+            <div class="platoon-header">
+                <div class="platoon-title">DERIVANTURES PLATOON</div>
+                <div class="platoon-subtitle">Innovators and Strategists</div>
+            </div>
+
+            <div class="marshals-grid" id="derivantures">
+                <!-- Derivantures Captain -->
+                <div class="marshal-card" data-platoon="derivantures">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/3.png" alt="CLYVANETH GIERIL P. BARAQUIA">
+                    </div>
+                    <div class="marshal-name">CLYVANETH GIERIL P. BARAQUIA</div>
+                    <div class="marshal-position">Derivantures - Captain</div>
+                </div>
+
+                <!-- Derivantures Vice Captain -->
+                <div class="marshal-card" data-platoon="derivantures">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/4.png" alt="JAYE MARR B. ELUMBARING">
+                    </div>
+                    <div class="marshal-name">JAYE MARR B. ELUMBARING</div>
+                    <div class="marshal-position">Derivantures -Vice Captain</div>
+                </div>
+
+                <!-- Derivantures Members -->
+                <div class="marshal-card" data-platoon="derivantures">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/5.png" alt="WEE WINKEE WYNDELLE G. BUTANAS">
+                    </div>
+                    <div class="marshal-name">WEE WINKEE WYNDELLE G. BUTANAS</div>
+                    <div class="marshal-position">Derivantures </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="derivantures">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/6.png" alt="RL MAR V. LOCULAN">
+                    </div>
+                    <div class="marshal-name">RL MAR V. LOCULAN</div>
+                    <div class="marshal-position">Derivantures </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="derivantures">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/7.png" alt="DHEN BENEDICT C. AGIAS">
+                    </div>
+                    <div class="marshal-name">DHEN BENEDICT C. AGIAS</div>
+                    <div class="marshal-position">Derivantures </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="derivantures">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/8.png" alt="LAILA L. LOMARDA">
+                    </div>
+                    <div class="marshal-name">LAILA L. LOMARDA</div>
+                    <div class="marshal-position">Derivantures </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="derivantures">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/9.png" alt="ANNE JAMAICAH A. BARING">
+                    </div>
+                    <div class="marshal-name">ANNE JAMAICAH A. BARING</div>
+                    <div class="marshal-position">Derivantures </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="derivantures">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/10.png" alt="LYNNE JOHANN CALAJATAN">
+                    </div>
+                    <div class="marshal-name">LYNNE JOHANN CALAJATAN</div>
+                    <div class="marshal-position">Derivantures </div>
+                </div>
+
+                <div class="marshal-card" data-platoon="derivantures">
+                    <div class="marshal-photo">
+                        <img src="img/marshals/11.png" alt="Maryjane Q. Tacujan">
+                    </div>
+                    <div class="marshal-name">MARYJANE Q. TACUJAN</div>
+                    <div class="marshal-position">Derivantures </div>
+                </div>
+            </div>
+
+            <!-- Marshals Information Section -->
+            <div class="max-w-4xl mx-auto mt-16 animate-fade-up" style="animation-delay: 0.8s">
+                <div class="glass-card rounded-3xl p-10 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-red-600 animate-pulse"></div>
+                    
+                    <h2 class="heading-font text-4xl font-bold mb-8 text-center gradient-text">About the Cadet Officers Division</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                        <div class="animate-fade-left" style="animation-delay: 1s">
+                            <h3 class="text-2xl font-bold mb-6 text-red-300">Our Platoon Specializations</h3>
+                            <div class="space-y-6">
+                                <div class="glass-card p-4 rounded-2xl transform transition-transform hover:scale-[1.02]">
+                                    <h4 class="text-xl font-bold text-white mb-2 flex items-center">
+                                        <i class="fas fa-shield-alt text-red-400 mr-3"></i>
+                                        Marshal’s Duty
+                                    </h4>
+                                    <p class="text-red-100">The Marshals provide manpower support to ensure safety, order, and the smooth flow of school events while upholding discipline and peace within the campus.</p>
+                                </div>
+                                
+                                <div class="glass-card p-4 rounded-2xl transform transition-transform hover:scale-[1.02]" style="animation-delay: 0.1s">
+                                    <h4 class="text-xl font-bold text-white mb-2 flex items-center">
+                                        <i class="fas fa-eye text-red-400 mr-3"></i>
+                                        Roles and Responsibilities
+                                    </h4>
+                                    <p class="text-red-100">•	Maintain peace and order during school events</p>
+                                    <p class="text-red-100">•	Enforce school rules and the Code of Conduct</p>
+                                    <p class="text-red-100">•	Assist in crowd control during assemblies and programs</p>
+                                    <p class="text-red-100">•	Serve as ushers in official functions</p>
+                                    <p class="text-red-100">•	Promote discipline and respect in the Vincentian community</p>
+                                </div>
+                                
+                                <div class="glass-card p-4 rounded-2xl transform transition-transform hover:scale-[1.02]" style="animation-delay: 0.2s">
+                                    <h4 class="text-xl font-bold text-white mb-2 flex items-center">
+                                        <i class="fas fa-cogs text-red-400 mr-3"></i>
+                                        Core Values
+                                    </h4>
+                                    <p class="text-red-100">•	Convictium – Discipline with dignity and respect</p>
+                                    <p class="text-red-100">•	Servicio – Service with honor and integrity</p>
+                                    <p class="text-red-100">•	Gloria – Excellence, accountability, and pride in service</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center animate-fade-right" style="animation-delay: 1s">
+                            <div class="w-48 h-48 rounded-full border-4 border-red-400/50 mx-auto overflow-hidden shadow-xl mb-6 animate-float">
+                                <div class="w-full h-full bg-gradient-to-br from-red-900/70 to-red-700/70 flex items-center justify-center">
+                                    <i class="fas fa-shield-alt text-8xl text-red-300 animate-pulse"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-red-300">Motto</h3>
+                            <p class="text-xl italic text-red-200 animate-pulse">"Discipline with Dignity, Service with Honor"</p>
+                            
+                            <div class="glass-card p-4 mt-6 rounded-2xl">
+                                <h4 class="text-lg font-bold text-red-300 mb-2">Marshal’s Pledge</h4>
+                                <p class="text-red-100 italic">
+                                    <i class="fas fa-quote-left text-red-400 mr-2"></i>
+                                    We commit to discipline, integrity, and service to the Vincentian community.
+                                    <i class="fas fa-quote-right text-red-400 ml-2"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Footer -->
+            <div class="text-center mt-16 pt-8 border-t border-red-800/30">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                    <div class="stats-card glass-card p-6 rounded-2xl animate-fade-up" style="animation-delay: 1.2s">
+                        <div class="text-4xl font-bold text-red-300 mb-2 stats-number">22</div>
+                        <div class="text-red-200">Total Cadet Officers</div>
+                    </div>
+                    <div class="stats-card glass-card p-6 rounded-2xl animate-fade-up" style="animation-delay: 1.4s">
+                        <div class="text-4xl font-bold text-red-300 mb-2 stats-number">3</div>
+                        <div class="text-red-200">Specialized Platoons</div>
+                    </div>
+                    <div class="stats-card glass-card p-6 rounded-2xl animate-fade-up" style="animation-delay: 1.6s">
+                        <div class="text-4xl font-bold text-red-300 mb-2 stats-number">9</div>
+                        <div class="text-red-200">Members per Platoon</div>
+                    </div>
+                    <div class="stats-card glass-card p-6 rounded-2xl animate-fade-up" style="animation-delay: 1.8s">
+                        <div class="text-4xl font-bold text-red-300 mb-2 stats-number">24/7</div>
+                        <div class="text-red-200">Ready to Serve</div>
+                    </div>
+                </div>
+                <p class="text-red-400 mt-6 italic animate-fade-up" style="animation-delay: 2.0s">
+                    <i class="fas fa-shield-alt mr-2 animate-pulse-slow"></i>
+                    Guardians of discipline and keepers of peace in the Vincentian community
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for marshal details -->
+    <div class="marshal-modal" id="marshalModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-red-800/30">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0 animate-fade-up" style="animation-delay: 2.1s">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-red-400 animate-float">
+                            <img src="img/logo.jpg" alt="SVCI-SHS SSG Logo" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="heading-font text-lg font-bold">SVCI-SHS SSG</h3>
+                            <p class="text-xs text-red-300">Cadet Officers Gallery</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center animate-fade-up" style="animation-delay: 2.2s">
+                    <p class="text-red-300">© 2024 SVCI Senior High School SSG</p>
+                    <p class="text-red-400 text-sm mt-1">Academic Year 2025-2026</p>
+                </div>
+                
+                <div class="mt-4 md:mt-0 animate-fade-up" style="animation-delay: 2.3s">
+                    <a href="index.html" class="glass-card px-6 py-2 rounded-full hover:bg-red-500/20 transition flex items-center space-x-2 hover:transform hover:scale-105">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover sound effect simulation and click animation
+            const marshalCards = document.querySelectorAll('.marshal-card');
+            
+            // Modal functionality
+            const marshalModal = document.getElementById('marshalModal');
+            const closeModal = document.getElementById('closeModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            // Platoon filtering functionality
+            const sectionTabs = document.querySelectorAll('.section-tab');
+            
+            sectionTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    sectionTabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    const section = this.dataset.section;
+                    
+                    // Show/hide marshal cards based on section
+                    marshalCards.forEach(card => {
+                        if (section === 'all' || card.dataset.platoon === section) {
+                            card.style.display = 'flex';
+                            // Re-trigger animation
+                            card.style.animation = 'none';
+                            setTimeout(() => {
+                                card.style.animation = '';
+                            }, 10);
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    
+                    // Show/hide platoon headers
+                    document.querySelectorAll('.platoon-header').forEach(header => {
+                        const platoonId = header.nextElementSibling.id;
+                        if (section === 'all' || platoonId === section) {
+                            header.style.display = 'block';
+                        } else {
+                            header.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            marshalCards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+                
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Click animation
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                    
+                    // Get marshal info
+                    const marshalName = this.querySelector('.marshal-name').textContent;
+                    const marshalPosition = this.querySelector('.marshal-position').textContent;
+                    const platoon = this.dataset.platoon;
+                    const marshalImg = this.querySelector('img').src;
+                    
+                    // Determine platoon full name
+                    let platoonFullName = '';
+                    if (platoon === 'cadet-corps') platoonFullName = 'Cadet Corps Platoon';
+                    else if (platoon === 'sentinels') platoonFullName = 'Sentinels Platoon';
+                    else if (platoon === 'derivantures') platoonFullName = 'Derivantures Platoon';
+                    
+                    // Determine position type
+                    let positionType = 'Platoon Member';
+                    if (marshalPosition.includes('Captain')) positionType = 'Captain';
+                    else if (marshalPosition.includes('Vice Captain')) positionType = 'Vice Captain';
+                    
+                    // Create modal content
+                    const modalHTML = `
+                        <div class="text-center animate-fade-in">
+                            <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-red-400 mx-auto mb-6 animate-float">
+                                <img src="${marshalImg}" alt="${marshalName}" class="w-full h-full object-cover">
+                            </div>
+                            <h2 class="heading-font text-2xl md:text-3xl font-bold mb-2 gradient-text">${marshalName}</h2>
+                            <div class="text-lg md:text-xl text-red-300 font-bold mb-4">${marshalPosition}</div>
+                            
+                            <div class="flex justify-center space-x-3 mb-6">
+                                <div class="glass-card px-4 py-2 rounded-full" style="background: rgba(220, 38, 38, 0.2); border: 1px solid rgba(248, 113, 113, 0.5);">
+                                    <i class="fas fa-shield-alt mr-2"></i>
+                                    <span class="text-white font-bold">Cadet Officer</span>
+                                </div>
+                                <div class="glass-card px-4 py-2 rounded-full" style="background: rgba(30, 64, 175, 0.2); border: 1px solid rgba(59, 130, 246, 0.5);">
+                                    <i class="fas fa-users mr-2"></i>
+                                    <span class="text-white font-bold">${platoonFullName}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="glass-card p-6 rounded-2xl mb-6">
+                                <p class="text-red-100 mb-4 text-center">
+                                    Dedicated Cadet Officer serving the Vincentian community with honor, discipline, and integrity.
+                                </p>
+                                <div class="text-red-200 italic border-l-4 border-red-400 pl-4 py-2">
+                                    <i class="fas fa-quote-left text-red-400 mr-2"></i>
+                                    Upholding discipline, ensuring peace, serving with honor
+                                    <i class="fas fa-quote-right text-red-400 ml-2"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center glass-card p-4 rounded-xl">
+                                    <div class="text-2xl font-bold text-red-300">${String(index + 1).padStart(2, '0')}</div>
+                                    <div class="text-sm text-red-200">Officer ID</div>
+                                </div>
+                                <div class="text-center glass-card p-4 rounded-xl">
+                                    <div class="text-2xl font-bold text-red-300">AY 25-26</div>
+                                    <div class="text-sm text-red-200">Term</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Update and show modal
+                    modalContent.innerHTML = modalHTML;
+                    marshalModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                marshalModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal on outside click
+            marshalModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    marshalModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && marshalModal.classList.contains('active')) {
+                    marshalModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Animate particles on scroll
+            const particles = document.querySelectorAll('.particle');
+            window.addEventListener('scroll', () => {
+                particles.forEach((particle, index) => {
+                    const speed = 0.3 + (index * 0.1);
+                    const yPos = window.scrollY * speed * 0.1;
+                    particle.style.transform = `translateY(${yPos}px)`;
+                });
+            });
+            
+            // Add scroll animation for cards
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('marshal-card')) {
+                            const index = Array.from(marshalCards).indexOf(entry.target);
+                            entry.target.style.animation = `cardEnter 0.6s ease ${0.1 + (index * 0.05)}s forwards`;
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe cards for scroll animation
+            marshalCards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
